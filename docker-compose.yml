@@ -1,0 +1,17 @@
+services:
+  available-now:
+    build: .
+    container_name: available-now
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "1600:3000"
+    volumes:
+      - ./data:/data
+    networks:
+      - servarr
+
+networks:
+  servarr:
+    name: servarr_default
+    external: true

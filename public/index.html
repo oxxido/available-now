@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Available now</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="Películas" href="movies.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Series" href="tv.xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="icon.svg" alt="" width="32" height="32" />
+      <span class="logo">Available now</span>
+    </div>
+    <div class="controls">
+      <label class="toggle">
+        <input type="checkbox" id="hide-owned" checked />
+        <span class="switch"></span>
+        <span>Ocultar lo que ya tengo</span>
+      </label>
+      <select id="sort" aria-label="Orden">
+        <option value="seeders">Más descargadas</option>
+        <option value="recent">Más recientes</option>
+        <option value="rating">Mejor valoradas</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div id="banner" class="banner" hidden></div>
+
+    <section class="slider" data-kind="movie">
+      <div class="slider-header">
+        <h2>Películas recién salidas <span class="count"></span></h2>
+        <div class="slider-links">
+          <a href="movies.xml" class="rss" title="Feed RSS">RSS</a>
+          <button class="view-all" type="button">Ver todo <span aria-hidden="true">›</span></button>
+        </div>
+      </div>
+      <div class="row"></div>
+    </section>
+
+    <section class="slider" data-kind="tv">
+      <div class="slider-header">
+        <h2>Series con episodios nuevos <span class="count"></span></h2>
+        <div class="slider-links">
+          <a href="tv.xml" class="rss" title="Feed RSS">RSS</a>
+          <button class="view-all" type="button">Ver todo <span aria-hidden="true">›</span></button>
+        </div>
+      </div>
+      <div class="row"></div>
+    </section>
+
+    <p class="footer" id="footer"></p>
+  </main>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <template id="card">
+    <div class="card" tabindex="0">
+      <img class="poster" alt="" loading="lazy" />
+      <div class="noposter"></div>
+      <span class="type"></span>
+      <span class="status" hidden></span>
+      <span class="meta"></span>
+      <div class="overlay">
+        <div class="info">
+          <span class="year"></span>
+          <span class="title"></span>
+          <span class="tags"></span>
+          <span class="overview"></span>
+        </div>
+        <button class="request" type="button">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 3a1 1 0 0 1 1 1v7.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42L9 11.6V4a1 1 0 0 1 1-1Zm-6 13a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"/></svg>
+          <span class="label">Pedir</span>
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <dialog id="details" class="details" aria-labelledby="d-title">
+    <button class="d-close" type="button" aria-label="Cerrar">×</button>
+    <div class="d-hero">
+      <img class="d-backdrop" alt="" />
+    </div>
+    <div class="d-body">
+      <img class="d-poster" alt="" />
+      <div class="d-main">
+        <span class="d-type"></span>
+        <h2 id="d-title" class="d-title"></h2>
+        <p class="d-facts"></p>
+        <p class="d-tagline"></p>
+        <div class="d-actions">
+          <button class="request" type="button">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 3a1 1 0 0 1 1 1v7.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42L9 11.6V4a1 1 0 0 1 1-1Zm-6 13a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"/></svg>
+            <span class="label">Pedir</span>
+          </button>
+          <a class="d-seerr" target="_blank" rel="noopener">Abrir en Seerr ↗</a>
+          <a class="d-trailer" target="_blank" rel="noopener" hidden>▶ Tráiler</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-section">
+      <p class="d-overview"></p>
+      <dl class="d-grid"></dl>
+      <h3 class="d-h">Torrents</h3>
+      <ul class="d-releases"></ul>
+      <h3 class="d-h d-cast-h">Reparto</h3>
+      <ul class="d-cast"></ul>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
