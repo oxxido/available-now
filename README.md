@@ -19,6 +19,7 @@ The background is transparent, so it takes the dashboard card's color.
 | `more` | `5` | titles listed below |
 | `sort` | `seeders` | `seeders`, `recent` or `rating` |
 | `owned` | | `1` also shows what Seerr already has |
+| `bg` | transparent | a hex color (`25262b`) for a solid background |
 
 Example: `http://<host>:1600/widget?type=tv&n=6&more=8`. If the dashboard is served over HTTPS,
 the browser blocks an HTTP iframe: put this app behind the same HTTPS proxy.

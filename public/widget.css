@@ -1,5 +1,8 @@
-/* Transparent so it sits on the dashboard's own card; text colors suit a dark dashboard. */
-html, body { height: 100%; margin: 0; background: transparent; }
+/* Transparent so it sits on the dashboard's own card; text colors suit a dark dashboard.
+   color-scheme must match the dark parent page: when an iframe's scheme differs from its
+   embedder's, browsers paint an opaque (white) backdrop behind it. ?bg= sets a color instead. */
+:root { color-scheme: dark; }
+html, body { height: 100%; margin: 0; background: var(--bg, transparent); }
 body {
   display: flex; flex-direction: column; justify-content: center; gap: 8px;
   padding: 6px; box-sizing: border-box; overflow: hidden;
@@ -21,7 +24,7 @@ body {
   color: inherit; text-decoration: none;
 }
 /* The frame is the poster's box, so the badges sit on the image even when the column is wider. */
-.frame { position: relative; display: block; width: min(100%, calc((100vh - 62px) * 2 / 3)); aspect-ratio: 2 / 3; }
+.frame { position: relative; display: block; width: min(85%, calc((100vh - 70px) * 2 / 3)); aspect-ratio: 2 / 3; }
 .p img, .p .none {
   width: 100%; height: 100%;
   object-fit: cover; border-radius: 8px;
@@ -39,10 +42,11 @@ body {
 
 .more {
   margin: 0; flex: none;
+  font-size: 15px; line-height: 1.4;
   color: #9ca3af;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .more[hidden] { display: none; }
-.more::before { content: "También: "; color: #6b7280; }
-.more a { color: #e5e7eb; text-decoration: none; }
+.more::before { content: "También: "; color: #9ca3af; font-weight: 600; }
+.more a { color: #f3f4f6; text-decoration: none; }
 .more a:hover { color: #a5b4fc; text-decoration: underline; }

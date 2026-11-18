@@ -2,6 +2,7 @@
 
 // Compact view for a dashboard iframe (Homarr): N posters in a row, then M more titles as text.
 //   /widget?type=movie|tv  &n=5  &more=5  &sort=seeders|recent|rating  &owned=1 (include what you already have)
+//          &bg=25262b (solid background instead of transparent)
 const params = new URLSearchParams(location.search);
 const type = params.get("type") === "tv" ? "tv" : "movie";
 const n = Math.max(1, Math.min(12, Number(params.get("n")) || 5));
@@ -16,6 +17,9 @@ const SORTS = {
 const sort = SORTS[params.get("sort")] ?? SORTS.seeders;
 
 document.documentElement.style.setProperty("--n", n);
+// ?bg=25262b or ?bg=%2325262b: a solid background, for dashboards where transparency does not work.
+const bg = (params.get("bg") ?? "").replace(/^#/, "");
+if (/^[0-9a-f]{3,8}$/i.test(bg)) document.documentElement.style.setProperty("--bg", `#${bg}`);
 
 // Links open the full page in a new tab with that title's details.
 const link = (it) => {
