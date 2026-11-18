@@ -472,7 +472,7 @@ const server = createServer(async (req, res) => {
       return send(res, 200, rss(url.pathname === "/movies.xml" ? "movie" : "tv", req), "application/rss+xml; charset=utf-8");
     }
     if (req.method === "GET") {
-      const file = url.pathname === "/" ? "index.html" : url.pathname.slice(1);
+      const file = url.pathname === "/" ? "index.html" : url.pathname === "/widget" ? "widget.html" : url.pathname.slice(1);
       if (!/^[a-z0-9_-]+\.(html|js|css|svg)$/i.test(file)) return send(res, 404, { message: "not found" });
       const body = await readFile(join(ROOT, "public", file)).catch(() => null);
       if (!body) return send(res, 404, { message: "not found" });

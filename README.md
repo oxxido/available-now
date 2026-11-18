@@ -6,6 +6,23 @@ Seerr-style page where each title can be requested in Seerr with one click.
 - Page: `http://<host>:1600`
 - RSS: `http://<host>:1600/movies.xml`, `http://<host>:1600/tv.xml`
 
+## Dashboard widget
+
+`http://<host>:1600/widget` is a compact view for an iframe (Homarr's iFrame widget): a row of
+posters and, below them, more titles as text. Each one opens the full page with its details.
+The background is transparent, so it takes the dashboard card's color.
+
+| Parameter | Default | |
+|---|---|---|
+| `type` | `movie` | `movie` or `tv` |
+| `n` | `5` | posters in the row |
+| `more` | `5` | titles listed below |
+| `sort` | `seeders` | `seeders`, `recent` or `rating` |
+| `owned` | | `1` also shows what Seerr already has |
+
+Example: `http://<host>:1600/widget?type=tv&n=6&more=8`. If the dashboard is served over HTTPS,
+the browser blocks an HTTP iframe: put this app behind the same HTTPS proxy.
+
 ## How it decides what to show
 
 Once an hour it walks Seerr's discover lists (TMDB), most popular first:

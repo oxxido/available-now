@@ -299,11 +299,22 @@ async function load() {
     const res = await fetch("api/items");
     data = await res.json();
     render();
+    openFromHash();
     if (!data.updatedAt || data.refreshing) setTimeout(load, 15_000);
   } catch (e) {
     toast(`No se pudo cargar la lista: ${e.message}`, true);
   }
 }
+
+// The widget links to "/#movie/123": open that title's details once the list is loaded.
+function openFromHash() {
+  const m = location.hash.match(/^#(movie|tv)\/(\d+)$/);
+  if (!m || !data) return;
+  const it = [...data.movies, ...data.tv].find((x) => x.mediaType === m[1] && x.tmdbId === Number(m[2]));
+  history.replaceState(null, "", location.pathname + location.search);
+  if (it) openDetails(it);
+}
+window.addEventListener("hashchange", openFromHash);
 
 hideOwned.addEventListener("change", () => { store.set("hideOwned", hideOwned.checked); render(); });
 sortSel.addEventListener("change", () => { store.set("sort", sortSel.value); render(); });
